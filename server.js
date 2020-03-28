@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 
+require('dotenv').load();
 const dev = process.env.NODE_ENV !== 'production';
 const next = require('next');
 const pathMatch = require('path-match');
