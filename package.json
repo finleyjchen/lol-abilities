@@ -1,0 +1,28 @@
+{
+  "name": "lol-abilities",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/finleyjchen/lol-abilities.git",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "kayn": "^0.10.2",
+    "lodash": "^4.17.15",
+    "next": "^9.3.2",
+    "nodemon": "^2.0.2",
+    "path-match": "^1.2.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "superagent": "^5.2.2",
+    "swr": "^0.1.18",
+    "url": "^0.11.0"
+  }
+}
