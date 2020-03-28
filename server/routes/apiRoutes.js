@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('superagent');
 const async = require('async');
-const token = "RGAPI-bdda7360-5b43-4ae7-aeb0-064fb6af547e"
+const token = process.env.RIOT_LOL_API_KEY
 
 // gets the most up-to-date version number of DDragon
 router.get('/patch', (req, res) => {
