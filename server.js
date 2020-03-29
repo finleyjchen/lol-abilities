@@ -32,7 +32,7 @@ app.prepare().then(() => {
   server.get(process.env.CERTBOT_ENDPOINT , (req, res) => {
     res.send(process.env.CERTBOT_KEY);
   });
-  
+
   server.get('/search', (req, res) => {
     return app.render(req, res, '/search', req.query);
   });
@@ -52,8 +52,16 @@ app.prepare().then(() => {
   });
 
   /* eslint-disable no-console */
-  server.listen(3000, (err) => {
-    if (err) throw err;
-    console.log('Server ready on http://localhost:3000');
+  if(dev) {
+
+    server.listen(3000, (err) => {
+      if (err) throw err;
+      console.log('Server ready on http://localhost:3000');
+    });
+  } else {
+    server.listen(5000, () => {
+      console.log('HTTP server running on port 80');
+    })
+  }
+
   });
-});
