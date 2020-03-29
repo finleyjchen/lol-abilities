@@ -59,8 +59,8 @@ app.prepare().then(() => {
       console.log('Server ready on http://localhost:3000');
     });
   } else {
-    server.listen(5000, () => {
-      console.log('HTTP server running on port 80');
+    server.listen(3000, () => {
+      console.log('HTTP server running on port 3000');
     })
   }
 
