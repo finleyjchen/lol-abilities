@@ -11,6 +11,11 @@ const { parse } = require('url');
 
 const apiRoutes = require('./server/routes/apiRoutes.js');
 
+// nginx acme challenge
+server.get(process.env.CERTBOT_ENDPOINT , (req, res) => {
+  res.send(process.env.CERTBOT_KEY);
+});
+
 app.prepare().then(() => {
   const server = express();
 

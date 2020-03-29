@@ -3,6 +3,8 @@ import Link from "next/link"
 import useSWR from "swr"
 import fetch from "node-fetch"
 import axios from "axios"
+// import '../css/tailwind.css'
+
 
 class NameForm extends React.Component {
   constructor(props) {
