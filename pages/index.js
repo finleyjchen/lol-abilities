@@ -13,6 +13,7 @@ class NameForm extends React.Component {
       empty: false,
       champion_ids: [],
       active_game: {},
+      summoner_names: [],
       champion_data: [],
       patch: "",
       id: "",
@@ -54,10 +55,11 @@ class NameForm extends React.Component {
           }
         })
         .then(response => {
-            const { active_game, champion_ids, } = response.data;
+            const { active_game, champion_ids, summoner_names } = response.data;
           this.setState({
             champion_ids: champion_ids,
             active_game: active_game,
+            summoner_names: summoner_names,
           }, () => {
               var requests = []
               for(var id of this.state.champion_ids) {
@@ -81,8 +83,26 @@ class NameForm extends React.Component {
   }
 
   render() {
-      const { loading, champion_ids, champion_data, value, error } = this.state
-      const championList = champion_data.map(obj => <li key={obj.name}>{obj.name}</li>)
+      const { loading, champion_ids, summoner_names, champion_data, value, error } = this.state
+      // const abilities = 
+      // const abilityImg = (obj) => obj.spells.filter((spell) => (
+      //   <img src={"/assets/10.6.1/img/spell" + spell.image.full} alt={spell.image.full} />
+      // ))
+
+
+      const championList = champion_data.map((obj, key) => (
+        <div key={obj.name}>
+          <h3><small>{summoner_names[key]}</small>{obj.name}</h3>
+          <img src={"/assets/10.6.1/img/champion/" + obj.image.full} alt={obj.id} className="champion-icon" />
+          <img src={"/assets/10.6.1/img/passive/"+ obj.passive.image.full} alt={obj.passive.name} />
+          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[0].image.full} alt={obj.spells[0].name} />
+          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[1].image.full} alt={obj.spells[1].name} />
+          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[2].image.full} alt={obj.spells[2].name} />
+          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[3].image.full} alt={obj.spells[3].name} />
+          {/* {abilityImg(obj)} */}
+
+        </div>
+      ))
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -96,19 +116,32 @@ class NameForm extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <ul>
 
         { loading && <p>Loading...</p>}
         { !loading && 
             championList
         }
-        </ul>
 
         { error && <p>Summoner is not currently in game</p>}
       </div>
     );
   }
 }
+
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   const res = await axios.get("/api/patch")
+//   const patch = await res.json()
+
+//   // By returning { props: posts }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       patch,
+//     },
+//   }
+// }
+
 class Home extends React.Component {
   constructor(props) {
     super(props);

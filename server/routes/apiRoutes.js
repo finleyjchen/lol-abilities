@@ -46,6 +46,11 @@ router.get('/search', (req, res) => {
             callback(null, champions)
         }],
 
+        summoner_names: ['active_game', function(results, callback) {
+            var names = results.active_game["participants"].map(summoner => summoner.summonerName)
+            callback(null, names)
+        }],
+
     },
     (err, results) => {
         if (err) {
