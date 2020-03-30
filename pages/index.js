@@ -1,5 +1,7 @@
 import React from "react"
 import Link from "next/link"
+import Layout from '../components/Layout'
+import Champion from '../components/Champion'
 import useSWR from "swr"
 import fetch from "node-fetch"
 import axios from "axios"
@@ -11,20 +13,28 @@ class NameForm extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      value: "",
+      error: false,
       empty: false,
+      isAdvanced: false,
       champion_ids: [],
+      value: "",
       active_game: {},
       summoner_names: [],
       champion_data: [],
       patch: "",
       id: "",
-      error: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.fetchData = this.fetchData.bind(this);
+  }
+
+  toggleAdvanced() {
+    this.setState({
+      isAdvanced: !this.state.isAdvanced
+    });
   }
 
   handleChange(event) {
@@ -85,7 +95,7 @@ class NameForm extends React.Component {
   }
 
   render() {
-      const { loading, champion_ids, summoner_names, champion_data, value, error } = this.state
+      const { loading, champion_ids, summoner_names, champion_data, value, error, isAdvanced } = this.state
       // const abilities = 
       // const abilityImg = (obj) => obj.spells.filter((spell) => (
       //   <img src={"/assets/10.6.1/img/spell" + spell.image.full} alt={spell.image.full} />
@@ -93,38 +103,39 @@ class NameForm extends React.Component {
 
 
       const championList = champion_data.map((obj, key) => (
-        <div key={obj.name}>
-          <h3><small>{summoner_names[key]}</small>{obj.name}</h3>
-          <img src={"/assets/10.6.1/img/champion/" + obj.image.full} alt={obj.id} className="champion-icon" />
-          <img src={"/assets/10.6.1/img/passive/"+ obj.passive.image.full} alt={obj.passive.name} />
-          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[0].image.full} alt={obj.spells[0].name} />
-          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[1].image.full} alt={obj.spells[1].name} />
-          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[2].image.full} alt={obj.spells[2].name} />
-          <img src={"/assets/10.6.1/img/spell/"+ obj.spells[3].image.full} alt={obj.spells[3].name} />
-          {/* {abilityImg(obj)} */}
-
-        </div>
+        <Champion isAdvanced={isAdvanced} data={obj} summoner_name={summoner_names[key]}/>
       ))
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="">
+        <section className="max-w-lg mx-auto flex">
+
+        <form className="" onSubmit={this.handleSubmit}>
           <label>
             Name:
             <input
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
-            />
+              />
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <button onClick={this.toggleAdvanced}>
+        {isAdvanced ? 'Switch to simple mode' : 'Switch to advanced mode'}
+      </button>
+      </section>
+      <section className="max-w-5xl mx-auto">
 
         { loading && <p>Loading...</p>}
+        <div className="grid-cols-2 grid gap-2">
+
         { !loading && 
             championList
-        }
+          }
 
+          </div>
         { error && <p>Summoner is not currently in game</p>}
+      </section>
       </div>
     );
   }
@@ -152,11 +163,10 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>League of Legends Champion Ability Viewer</h1>
-        <p>Current DataDragon version:</p>
+      <Layout>
         <NameForm />
-      </div>
+      </Layout>
+      
     );
   }
 }
