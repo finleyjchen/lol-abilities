@@ -116,6 +116,7 @@ class NameForm extends React.Component {
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
+              autoFocus
               />
           </label>
           <input type="submit" value="Submit" />
@@ -163,7 +164,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout title="LOLAbilities">
         <NameForm />
       </Layout>
       

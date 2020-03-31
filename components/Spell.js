@@ -6,7 +6,7 @@ export default class extends React.Component {
 
     render() {
         // this.props.data.effectBurn["1"]
-        var regex = /(\{\{.+?\}\})/
+        var regex = /(\{\{.+?\}\})|\<span/
         const { tooltip, description, cooldownBurn, costBurn, name, isAdvanced, image, rangeBurn, effectBurn, vars } = this.props.data
 
         var split_string = tooltip.split(regex).filter(Boolean);
@@ -24,15 +24,18 @@ export default class extends React.Component {
                 var key = i.substring(3,5)
                 console.log(i, key)
                 updatedTooltip = updatedTooltip + effectBurn[i]
+            } 
+            if (i.indexOf("color") > -1 ) {
+                updatedTooltip = updatedTooltip + i.substring(i.indexOf("r")+1, i.indexOf("r") + 7)
             } else {
                 updatedTooltip = updatedTooltip + i
             }
         }
         return(
             <li className="flex flex-wrap items-center border-t first:border-t-0 border-gray-600 p-1">
-                <div className="w-full flex items-center justify-start">
+                <div className="w-full flex items-center justify-start pb-1">
 
-                    <h3 className="text-base">{name}</h3>
+                    <h3 className="text-base font-serif">{name}</h3>
                     <ul className="font-bold flex text-xs items-baseline justify-left">
                         <li className="px-2">
                             <small className="uppercase tracking-wider">Cooldown: </small><span className="">{cooldownBurn}</span>

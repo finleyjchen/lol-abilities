@@ -6,7 +6,7 @@ export default class extends React.Component {
     render() {
         return(
             <li className="flex items-center flex-wrap border-t first:border-t-0 border-gray-600 p-1">
-                <h5 className="w-full">{this.props.data.name}</h5>
+                <h5 className="w-full font-serif ">{this.props.data.name}</h5>
                 <div className="w-1/12">
                     <img class="w-full" src={"/assets/10.6.1/img/passive/"+ this.props.data.image.full} alt={this.props.data.name} />
                 </div>
