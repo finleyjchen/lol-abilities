@@ -5,7 +5,7 @@ node_modules
 yarn-error.log
 .env
 .github-latest-tag
-public
+public/assets/10.6.1
 next.config.js
 key.pem
 cert.pem
