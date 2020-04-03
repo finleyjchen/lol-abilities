@@ -1,4 +1,4 @@
-
+import parse from 'html-react-parser'
 export default class extends React.Component {
     constructor(props) {
         super(props)
@@ -22,7 +22,6 @@ export default class extends React.Component {
             if (i.indexOf("{{") > -1) {
                 //get key
                 var key = i.substring(3,5)
-                console.log(i, key)
                 updatedTooltip = updatedTooltip + effectBurn[i]
             } 
             if (i.indexOf("color") > -1 ) {
@@ -32,7 +31,7 @@ export default class extends React.Component {
             }
         }
         return(
-            <li className="flex flex-wrap items-center border-t first:border-t-0 border-gray-600 p-1">
+            <li key={name} className="flex flex-wrap items-center border-t first:border-t-0 border-gray-600 p-1">
                 <div className="w-full flex items-center justify-start pb-1">
 
                     <h3 className="text-base font-serif">{name}</h3>
@@ -56,7 +55,7 @@ export default class extends React.Component {
 
                     </li>
                     <li className={`text-xs tracking-tight ${this.props.isAdvanced ? "" : "hidden"}`}>{updatedTooltip}</li>
-                    <li className={`text-xs tracking-tight ${this.props.isAdvanced ? "hidden" : ""}`}>{description}</li>
+                    <li className={`text-xs tracking-tight ${this.props.isAdvanced ? "hidden" : ""}`}>{parse(description)}</li>
                 </ul>
             </li>
         )

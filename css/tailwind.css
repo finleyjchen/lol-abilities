@@ -2,13 +2,34 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@font-face {
+    src: url(../public/assets/fonts/AndersonGrotesk.otf);
+    font-weight: 400;
+    font-family: AndersonGrotesk, sans-serif;
+}
 body {
-    background-color:#F1F3F8;
-    color:#181E34;
+    background-color:#181E34;
     font-family: 'Fira Sans', sans-serif;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: AndersonGrotesk, sans-serif;
 }
 
 .mono {
     font-family: 'Fira Mono', monospace;
+}
+.hidden {
+    
+}
+
+.bg-image {
+    background-image: url(../public/assets/background.jpg);
+}
+
+.text-color-lol {
+    color:#c4b998;
+    color:rgb(255, 255, 255);
+}
+
+.bg-lol {
+    background-color:#c4b998;
 }
