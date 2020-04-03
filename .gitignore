@@ -7,3 +7,5 @@ yarn-error.log
 .github-latest-tag
 public
 next.config.js
+key.pem
+cert.pem

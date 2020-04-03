@@ -8,6 +8,8 @@ const pathMatch = require('path-match');
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const { parse } = require('url');
+const https = require('https');
+
 
 const apiRoutes = require('./server/routes/apiRoutes.js');
 
@@ -59,9 +61,16 @@ app.prepare().then(() => {
       console.log('Server ready on http://localhost:3000');
     });
   } else {
-    server.listen(3000, () => {
-      console.log('HTTP server running on port 3000');
-    })
+    console.log('using production configs');
+    const key = fs.readFileSync('./key.pem');
+    const cert = fs.readFileSync('./cert.pem');
+    https.createServer({
+      key,
+      cert,
+    }, server).listen(3000, (err) => {
+      if (err) throw err;
+      console.log('> Ready on https://localhost:3000');
+    });
   }
 
   });
