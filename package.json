@@ -19,7 +19,7 @@
     "html-react-parser": "^0.10.3",
     "js-cookie": "^2.2.1",
     "kayn": "^0.10.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "next": "^9.3.2",
     "nodemon": "^2.0.2",
     "path-match": "^1.2.4",
